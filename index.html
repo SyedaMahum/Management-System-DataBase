@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Data Form</title>
+    <script>
+        function showForm(type) {
+            var form = document.getElementById(type + 'Form');
+            form.style.display = 'block';
+
+            // Hide the other forms
+            var otherForms = document.querySelectorAll('.dataForm');
+            otherForms.forEach(function(otherForm) {
+                if (otherForm.id !== type + 'Form') {
+                    otherForm.style.display = 'none';
+                }
+            });
+        }
+
+        function generateTickets(type) {
+            var familyMembersInput = document.getElementById(type + 'FamilyMembers');
+            var ticketsInput = document.getElementById(type + 'Tickets');
+            
+            // Assuming each family member gets a ticket
+            var tickets = familyMembersInput.value;
+            
+            ticketsInput.value = tickets;
+        }
+        function showMenuItemsForm() {
+            var menuItemsForm = document.getElementById('menuItemsForm');
+            menuItemsForm.style.display = 'block';
+        }
+    </script>
+     
+    
+</head>
+<style>
+   .header {
+        padding: 10px;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+        background-color: chartreuse;
+    }
+
+
+    svg {
+        width: 100%; /* Expand the SVG to the full width of the container */
+        height: auto; /* Maintain the aspect ratio */
+        display: block;
+        margin: auto; /* Center the SVG */
+        margin-top: 20px; /* Add some top margin for spacing */
+    }
+
+    .centered-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    button {
+        margin: 5px; /* Add margin for spacing */
+    }
+  
+</style>
+<body>
+  
+    <div class="header">
+
+        <h1 >Welcome Party Management System</h1>
+      </div>
+
+    <br>
+    
+    <div class="centered-buttons">
+        
+        <button style = "color:purple" onclick="showForm('student')">Register as Student</button>
+        <button style = "color:green"  onclick="showForm('teacher')">Register as Teacher</button>
+        
+        <!-- new buttons -->
+        <button style="color: blue" onclick="showForm('decoration')">Decoration Themes</button>
+        <button style="color: red" onclick="showForm('performance')">Performance Data</button>
+      
+    </div>
+   
+
+    <form id="studentForm" class="dataForm" style="display: none;" action="/addStudent" method="post">
+        <h2 style ="background-color:chartreuse; color:darkmagenta;" >As Student</h2>
+        <!-- Student-specific fields -->
+        <label for="studentName">Name:</label>
+        <input type="text" id="studentName" name="studentName" required>
+        <br>
+        <label for="studentEmail">Email:</label>
+        <input type="email" id="studentEmail" name="studentEmail" required>
+        <br>
+        <label for="studentUsername">Username:</label>
+        <input type="text" id="studentUsername" name="studentUsername" required>
+        <br>
+        <label for="studentPassword">Password:</label>
+        <input type="password" id="studentPassword" name="studentPassword" required>
+        <br>
+        <label for="dietaryPreferences">Dietary Preferences:</label>
+        <input type="text" id="dietaryPreferences" name="dietaryPreferences">
+        <br>
+        <label for="studentFamilyMembers">Family Members:</label>
+        <input type="number" id="studentFamilyMembers" name="familyMembers" value="0" onchange="generateTickets('student')">
+        <br>
+        <label for="studentTickets">Tickets:</label>
+        <input type="text" id="studentTickets" name="studentTickets" readonly>
+        <br>
+        <label for="purchased">Purchased:</label>
+        <input type="text" id="purchased" name="purchased">
+        <br>
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
+        <br>
+        <label for="purchaseDate">Purchase Date:</label>
+        <input type="date" id="purchaseDate" name="purchaseDate">
+        <br>
+        <h2 style ="background-color:chartreuse; color:darkmagenta;">Add Menu Items</h2>
+    
+        <label for="menuName">Menu Name:</label>
+        <input type="text" id="menuName" name="menuName" required>
+        <br>
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="itemName" required>
+        <br>
+        <label for="itemPrice">Price:</label>
+        <input type="number" id="itemPrice" name="itemPrice" step="0.01" required>
+        <br>
+        <label for="votes">Votes:</label>
+        <input type="number" id="votes" name="votes" value="0">
+
+
+        <button type="submit">Submit</button>
+        
+    </form>
+
+    <form id="teacherForm" class="dataForm" style="display: none;" action="/addTeacher" method="post">
+        <h2 style ="background-color:chartreuse; color:darkmagenta;">As Teacher</h2>
+        <!-- Teacher-specific fields -->
+        <label for="teacherName">Name:</label>
+        <input type="text" id="teacherName" name="teacherName" required>
+        <br>
+        <label for="teacherEmail">Email:</label>
+        <input type="email" id="teacherEmail" name="teacherEmail" required>
+        <br>
+        <label for="teacherFamilyMembers">Family Members:</label>
+        <input type="number" id="teacherFamilyMembers" name="teacherFamilyMembers" value="0" onchange="generateTickets('teacher')">
+        <br>
+        <label for="teacherTickets">Tickets:</label>
+        <input type="text" id="teacherTickets" name="teacherTickets" readonly>
+        <br>
+        <label for="purchased">Purchased:</label>
+        <input type="text" id="purchased" name="purchased">
+        <br>
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
+        <br>
+        <label for="purchaseDate">Purchase Date:</label>
+        <input type="date" id="purchaseDate" name="purchaseDate">
+        <br>
+        <button type="submit">Submit</button>
+       
+       
+    </form>
+
+
+<!-- new forms  -->
+
+<form id="decorationForm" class="dataForm" style="display: none;" action="/dinnerRegistration" method="post">
+    <h2 style="background-color: chartreuse; color: darkmagenta;">Decoration</h2>
+    
+        <label for="itemname">Item Name:</label>
+        <input type="text" id="itemname" name="itemname" required>
+        <br>
+
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required>
+        <br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<form id="performanceForm" class="dataForm" style="display: none;" action="/submitPerformanceData" method="post">
+    <h2 style="background-color: chartreuse; color: darkmagenta;">Performance Data</h2>
+
+    <label for="performanceType">Performance Type:</label>
+    <select id="performanceType" name="performanceType" required>
+        <option value="dance">Dance</option>
+        <option value="music">Music</option>
+        <option value="singing">Singing</option>
+        <option value="other">Other</option>
+    </select>
+    <br>
+
+    <label for="duration">Duration (seconds):</label>
+    <input type="number" id="duration" name="duration" required>
+    <br>
+
+    <label for="specialRequirements">Special Requirements:</label>
+    <input type="text" id="specialRequirements" name="specialRequirements">
+    <br>
+    <label for="votes">Votes:</label>
+        <input type="number" id="votes" name="votes" value="0">
+
+    <button type="submit">Submit</button>
+</form>
+
+
+    <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Sky -->
+    <rect x="0" y="0" width="400" height="100" fill="#87CEEB" />
+
+    <!-- Grass -->
+    <rect x="0" y="100" width="400" height="100" fill="#8FBC8F" />
+
+    <!-- Balloons -->
+    <circle cx="100" cy="120" r="20" fill="#FF69B4" />
+    <circle cx="200" cy="80" r="25" fill="#87CEEB" />
+    <circle cx="300" cy="130" r="18" fill="#FFA500" />
+
+    <!-- house  -->
+    <rect x="0" y="80" width="100" height="100" fill="yellow"/>
+    <polygon points="0,80 50,50 100,80" fill="brown" />
+    <rect x="45" y="120" width="15" height="50" fill="brown"/>
+    <rect x="15" y="90" width="25" height="25" fill="blue"/>
+    <rect x="65" y="90" width="25" height="25" fill="blue"/>
+
+    <!-- tree -->
+    <rect x="120" y="120" width="15" height="40" fill="brown"/>
+    <circle cx="130" cy="110" r="15"  fill="green" />
+
+    <!-- Confetti -->
+    <circle cx="50" cy="150" r="5" fill="#FFD700" />
+    <circle cx="120" cy="170" r="5" fill="#FFD700" />
+    <circle cx="180" cy="140" r="5" fill="#FFD700" />
+    <circle cx="250" cy="160" r="5" fill="#FFD700" />
+    <circle cx="320" cy="180" r="5" fill="#FFD700" />
+</svg>
+
+
+</body>
+</html>
